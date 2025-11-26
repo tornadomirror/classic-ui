@@ -2453,13 +2453,13 @@
 
 "@tornado/fixed-merkle-tree@0.7":
   version "0.7.3"
-  resolved "https://git.tornado.ws/api/packages/tornado-packages/npm/%40tornado%2Ffixed-merkle-tree/-/0.7.3/fixed-merkle-tree-0.7.3.tgz#6636ce9d334553c5f17e5a564fd22f2e9ec04472"
-  integrity sha512-8UWvIzz0/rMGBkzXACwmCv/5I1VJmnshAKc4C+nkTfOdmnX8Pf1bBa0GlxUIZ25ZFGiU/h2IKEHYckmHovwzEA==
+  resolved "https://codeberg.org/api/packages/torndao/npm/%40tornado%2Ffixed-merkle-tree/-/0.7.3/fixed-merkle-tree-0.7.3.tgz#dfcb5e870513e3d0b9300a5c3cb471b7dbddba96"
+  integrity sha512-IZ+NG1yIV9TPApuaqSzylcZn2ZYqBoG67hSVTif4dagsF4pvCF9NaM3YUrZPy1UdpJp4xps08DXlUuF/xlLIeg==
 
 "@tornado/gas-price-oracle@^0.5.3":
   version "0.5.3"
-  resolved "https://git.tornado.ws/api/packages/tornado-packages/npm/%40tornado%2Fgas-price-oracle/-/0.5.3/gas-price-oracle-0.5.3.tgz#fb5423dddee2f52edbc16174c5ddce90bea5413d"
-  integrity sha512-LpVfPiPIz3FOmJdiqJf/yoeO5n9/Pd5jgtdY+6hB9lNW0AiWhylhpScojICViS+3OL9QC8CoTlgr+kbfGeO9pQ==
+  resolved "https://codeberg.org/api/packages/torndao/npm/%40tornado%2Fgas-price-oracle/-/0.5.3/gas-price-oracle-0.5.3.tgz#2bfecf70437d22e33e8912a04d9e0149bf7b67de"
+  integrity sha512-fHGLKxSMEWY0LtMj8ErRX4NcqTueryYPEmmNzJx+vNydAwx5ecjBQSV4zQPRNPrJdokn5WhLb/1SFGOBqHaSuA==
   dependencies:
     axios "^0.21.2"
     bignumber.js "^9.0.0"
@@ -2467,8 +2467,8 @@
 
 "@tornado/snarkjs@0.1.20", "@tornado/snarkjs@^0.1.20":
   version "0.1.20"
-  resolved "https://git.tornado.ws/api/packages/tornado-packages/npm/%40tornado%2Fsnarkjs/-/0.1.20/snarkjs-0.1.20.tgz#d7610cd3c8dc10598da7dc3e40e5d7470c3aa8c7"
-  integrity sha512-mn+ePoQjqOHyDyK8AMy8SXYqNSxJWVswWVmMYvuc75/9bBtJ7SNtwrTByxmfWjrf4S3BM3IrGfHqBHEXY6gR4Q==
+  resolved "https://codeberg.org/api/packages/torndao/npm/%40tornado%2Fsnarkjs/-/0.1.20/snarkjs-0.1.20.tgz#715aaf30248fffb9b7a1ee558e9d1b9a765a0e99"
+  integrity sha512-Df0QvExjephUuWYWyXeIEZI91KZv+bBtIk/1aCWNXtglYl7ZnoeU3/BPvfR2JKRLR/WdxcFTXZSdKaIR10JlQg==
   dependencies:
     big-integer "^1.6.43"
     chai "^4.2.0"
@@ -2479,13 +2479,13 @@
 
 "@tornado/tornado-config@^2.0.0":
   version "2.0.0"
-  resolved "https://git.tornado.ws/api/packages/tornado-packages/npm/%40tornado%2Ftornado-config/-/2.0.0/tornado-config-2.0.0.tgz#52bbc179ecb2385f71b4d56e060b68e7dd6fb8b4"
-  integrity sha512-7EkpWNfEm34VEOrbLnPpvd/aUJYnA1L+6/qx2fZ/AfmuJFkjSZ18Z4jvVGNY7ktKIhTu3/Tbze+9l3eNueCNIA==
+  resolved "https://codeberg.org/api/packages/torndao/npm/%40tornado%2Ftornado-config/-/2.0.0/tornado-config-2.0.0.tgz#0ab73fae5d6b95712396479911c6da9a6b407c89"
+  integrity sha512-HRcZtzKhVOhsotiuguGe0UMb/30nqFweRw+3PmnULLxKrXKV6zH9V1jj2R+6TBAeXFJwr8Yhe16BdHvG2/7SRg==
 
 "@tornado/tornado-oracles@^2.1.0":
   version "2.1.0"
-  resolved "https://git.tornado.ws/api/packages/tornado-packages/npm/%40tornado%2Ftornado-oracles/-/2.1.0/tornado-oracles-2.1.0.tgz#2aa0d8c9288992e6d194d4bb28acb37c2035c453"
-  integrity sha512-Y6FPAGnCvHLWzUnNYgGoOv+X7KY3CF02rRSawataYaLyl+v2ivh7RYZZZ3G/B5hXf+pD3IFeCdm4PDnTNyNe1g==
+  resolved "https://codeberg.org/api/packages/torndao/npm/%40tornado%2Ftornado-oracles/-/2.1.0/tornado-oracles-2.1.0.tgz#6a1766e0561a322b0be224f5e15fb085b30d5a7c"
+  integrity sha512-m2m7+I+cpxCeGx2drq/IHuuzC6TsZKmagkaX2t4MDQaGr7xu367FDkpMhex1wvqPxrJSSqsp6gEVOQBvRxwR6Q==
   dependencies:
     "@tornado/gas-price-oracle" "^0.5.3"
     "@tornado/tornado-config" "^2.0.0"
@@ -2495,8 +2495,8 @@
 
 "@tornado/websnark@0.0.4":
   version "0.0.4"
-  resolved "https://git.tornado.ws/api/packages/tornado-packages/npm/%40tornado%2Fwebsnark/-/0.0.4/websnark-0.0.4.tgz#4c603259b71172225a70e3d454344fa172710970"
-  integrity sha512-dHbaS41ILPq5NyVBDW8AmUPoSKvamtkTeIhyuKKmoyOrZMAUhJ9y1B2zRcejUKfhCZkIjAgCt9bvdzdOGGswwQ==
+  resolved "https://codeberg.org/api/packages/torndao/npm/%40tornado%2Fwebsnark/-/0.0.4/websnark-0.0.4.tgz#c15196db16e8c5965bd7c9938692b4289fd4e284"
+  integrity sha512-TZ2xanChs6CWCze2VfwlPbTbExdEblHZN8qKAXKAF1F5wkKfh4AZAUN+BnkSIWhc1eXJV/YPU74tQfgmFt5v7g==
   dependencies:
     "@tornado/snarkjs" "^0.1.20"
     big-integer "1.6.42"
