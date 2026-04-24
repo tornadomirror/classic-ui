@@ -21,9 +21,29 @@ export default {
     networkName: 'Ethereum Mainnet',
     deployedBlock: 9116966,
     rpcUrls: {
-      blockscoutRPC: {
-        name: 'BlockscoutRPC',
-        url: 'https://eth.blockscout.com/api/eth-rpc'
+      pocket: {
+        name: 'pocket',
+        url: 'https://eth.api.pocket.network'
+      },
+      mevblocker: {
+        name: 'Mevblocker',
+        url: 'https://rpc.mevblocker.io'
+      },
+      mevblockerFullprivacy: {
+        name: 'Mevblocker',
+        url: 'https://rpc.mevblocker.io/fullprivacy'
+      },
+      torndaoRPC: {
+        name: 'Torndao RPC',
+        url: 'https://torndao.com/ethrpc'
+      },
+      sentioRPC: {
+        name: 'SentioRPC',
+        url: 'https://rpc.sentio.xyz/mainnet'
+      }，
+      lavaRPC: {
+        name: 'LavaRPC',
+        url: 'https://eth1.lava.build'
       },
       blastRPC: {
         name: 'BlastRPC',
@@ -33,25 +53,9 @@ export default {
         name: 'Xrpc',
         url: 'https://0xrpc.io/eth'
       },
-      gasHawkRPC: {
-        name: 'GasHawkRPC',
-        url: 'https://core.gashawk.io/rpc'
-      },
       lavaRPC: {
         name: 'LavaRPC',
         url: 'https://eth1.lava.build'
-      },
-      torndaoRPC: {
-        name: 'Torndao RPC',
-        url: 'https://torndao.com/ethrpc'
-      },
-      sentioRPC: {
-        name: 'SentioRPC',
-        url: 'https://rpc.sentio.xyz/mainnet'
-      },
-      tornadoRPC: {
-        name: 'Tornado RPC',
-        url: 'https://tornadocash-rpc.com/mainnet'
       }
     },
     multicall: '0xeefba1e63905ef1d7acba5a8513c70307c1ce441',
