@@ -40,7 +40,7 @@ export default {
       sentioRPC: {
         name: 'SentioRPC',
         url: 'https://rpc.sentio.xyz/mainnet'
-      }，
+      },
       lavaRPC: {
         name: 'LavaRPC',
         url: 'https://eth1.lava.build'
