@@ -78,6 +78,68 @@ export const GET_ENCRYPTED_NOTES = `
   }
 `
 
+export const GET_PROPOSALS = `
+  query getProposals($first: Int, $skip: Int) {
+    proposals(first: $first, skip: $skip, orderBy: proposalId, orderDirection: asc) {
+      id
+      proposalId
+      proposer
+      target
+      startTime
+      endTime
+      description
+      blockNumber
+      transactionHash
+      executed
+    }
+  }
+`
+
+export const GET_DELEGATES = `
+  query getDelegates($delegatee: Bytes!) {
+    delegates(first: 1000, orderBy: blockNumber, orderDirection: desc, where: { delegateTo: $delegatee }) {
+      id
+      account
+      delegateTo
+      blockNumber
+    }
+  }
+`
+
+export const GET_UNDELEGATES = `
+  query getUndelegates($delegatee: Bytes!) {
+    undelegates(first: 1000, orderBy: blockNumber, orderDirection: desc, where: { delegateFrom: $delegatee }) {
+      id
+      account
+      delegateFrom
+      blockNumber
+    }
+  }
+`
+
+export const GET_VOTED = `
+  query getVoted($proposalId: Int!, $first: Int, $skip: Int, $fromBlock: Int) {
+    votes(
+      first: $first
+      skip: $skip
+      orderBy: blockNumber
+      orderDirection: asc
+      where: { proposalId: $proposalId, blockNumber_gte: $fromBlock }
+    ) {
+      id
+      proposalId
+      voter
+      support
+      votes
+      blockNumber
+      transactionHash
+      from
+      input
+      timestamp
+    }
+  }
+`
+
 export const _META = `
   query getMeta {
     _meta {

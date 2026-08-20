@@ -3,29 +3,24 @@
 
 import { utils } from 'ethers'
 import uniqBy from 'lodash/uniqBy'
-import chunk from 'lodash/chunk'
 
-import { lookupAddresses, createBatchRequestCallback } from '@/services'
-import { CHUNK_COUNT_PER_BATCH_REQUEST } from '@/constants'
+import { graph, lookupAddresses } from '@/services'
 
-const { toWei, fromWei, toBN } = require('web3-utils')
-
-const CACHE_TX = {}
-const CACHE_BLOCK = {}
+const { toWei, fromWei, toBN, toChecksumAddress } = require('web3-utils')
 
 const parseComment = (calldata, govInstance) => {
   const empty = { contact: '', message: '' }
   if (!calldata || !govInstance) return empty
 
-  const methodLength = 4 // length of castDelegatedVote method
-  const result = utils.defaultAbiCoder.decode(
-    ['address[]', 'uint256', 'bool'],
-    utils.hexDataSlice(calldata, methodLength)
-  )
-  const data = govInstance.methods.castDelegatedVote(...result).encodeABI()
-  const dataLength = utils.hexDataLength(data)
-
   try {
+    const methodLength = 4 // length of castDelegatedVote method
+    const result = utils.defaultAbiCoder.decode(
+      ['address[]', 'uint256', 'bool'],
+      utils.hexDataSlice(calldata, methodLength)
+    )
+    const data = govInstance.methods.castDelegatedVote(...result).encodeABI()
+    const dataLength = utils.hexDataLength(data)
+
     const str = utils.defaultAbiCoder.decode(['string'], utils.hexDataSlice(calldata, dataLength))
     const [contact, message] = JSON.parse(str)
     return { contact, message }
@@ -56,49 +51,15 @@ const createProposalComment = (resultAll, votedEvent) => {
 
     ...comment,
 
+    from: votedEvent.from || null,
+    input: votedEvent.input || null,
+
     ens: {
       delegator: null,
       voter: null
     },
     delegator: null,
-    timestamp: null
-  }
-}
-
-const createFetchCommentWithMessage = (web3, batch, govInstance) => async (proposalComment) => {
-  const { transactionHash, voter, blockNumber } = proposalComment
-
-  if (!CACHE_TX[transactionHash]) {
-    CACHE_TX[transactionHash] = new Promise((resolve, reject) => {
-      const callback = createBatchRequestCallback(resolve, reject)
-      batch.add(web3.eth.getTransaction.request(transactionHash, callback))
-    })
-  }
-
-  if (!CACHE_BLOCK[blockNumber]) {
-    CACHE_BLOCK[blockNumber] = new Promise((resolve, reject) => {
-      const callback = createBatchRequestCallback(resolve, reject)
-      batch.add(web3.eth.getBlock.request(blockNumber, callback))
-    })
-  }
-
-  try {
-    const [tx, blockInfo] = await Promise.all([CACHE_TX[transactionHash], CACHE_BLOCK[blockNumber]])
-
-    const isMaybeHasComment = voter === tx.from
-    const comment = parseComment(isMaybeHasComment ? tx.input : null, govInstance)
-
-    return {
-      ...proposalComment,
-      ...comment,
-
-      delegator: voter === tx.from ? null : tx.from,
-      timestamp: blockInfo.timestamp
-    }
-  } catch (error) {
-    CACHE_TX[transactionHash] = null
-    CACHE_BLOCK[blockNumber] = null
-    return proposalComment
+    timestamp: votedEvent.timestamp || null
   }
 }
 
@@ -179,25 +140,35 @@ const actions = {
     let { blockNumber: fromBlock } = proposal
 
     const netId = rootGetters['metamask/netId']
-    const govInstance = rootGetters['governance/gov/govContract']({ netId })
 
     if (comments[0]?.id === proposal.id) {
       fromBlock = comments[0].blockNumber + 1
     }
 
     try {
-      let votedEvents = await govInstance.getPastEvents('Voted', {
-        filter: {
-          // support: [false],
-          proposalId: proposal.id
-        },
-        fromBlock,
-        toBlock: 'latest'
-      })
+      let votedEvents = []
+
+      if (netId === 1) {
+        votedEvents = await graph.getProposalVotes({ proposalId: proposal.id, fromBlock })
+      }
 
       console.log('fetchVotedEvents', votedEvents.length)
 
-      votedEvents = votedEvents.sort((a, b) => b.blockNumber - a.blockNumber)
+      votedEvents = votedEvents
+        .sort((a, b) => b.blockNumber - a.blockNumber)
+        .map((vote) => ({
+          transactionHash: vote.transactionHash,
+          blockNumber: vote.blockNumber,
+          returnValues: {
+            proposalId: vote.proposalId,
+            voter: toChecksumAddress(vote.voter),
+            support: vote.support,
+            votes: vote.votes
+          },
+          from: vote.from ? toChecksumAddress(vote.from) : null,
+          input: vote.input || null,
+          timestamp: vote.timestamp || null
+        }))
       votedEvents = uniqBy(votedEvents, 'returnValues.voter')
 
       console.log('fetchVotedEvents uniq', votedEvents.length)
@@ -211,28 +182,32 @@ const actions = {
       return null
     }
   },
-  async fetchCommentsMessages(context, { comments }) {
+  fetchCommentsMessages(context, { comments }) {
     const { rootGetters } = context
 
     const netId = rootGetters['metamask/netId']
     const govInstance = rootGetters['governance/gov/govContract']({ netId })
-    const web3 = rootGetters['governance/gov/getWeb3']({ netId })
-    const commentListChunks = chunk(comments, CHUNK_COUNT_PER_BATCH_REQUEST)
-
-    let results = []
 
     try {
-      for await (const list of commentListChunks) {
-        const batch = new web3.BatchRequest()
-        const fetchCommentsWithMessages = createFetchCommentWithMessage(web3, batch, govInstance)
-        const promises = list.map(fetchCommentsWithMessages)
-        batch.execute()
-        const result = await Promise.all(promises)
+      return comments.map((comment) => {
+        try {
+          const { voter, from, input, timestamp } = comment
 
-        results = results.concat(result)
-      }
+          const isSelfVote = Boolean(from) && voter === from
+          const message = input ? parseComment(input, govInstance) : {}
 
-      return results
+          return {
+            ...comment,
+            ...message,
+
+            delegator: from ? (isSelfVote ? null : from) : comment.delegator,
+            timestamp: timestamp || comment.timestamp
+          }
+        } catch (e) {
+          console.error('fetchCommentsMessages', comment.id, e.message)
+          return comment
+        }
+      })
     } catch (e) {
       console.error('fetchCommentsMessages', e.message)
     }

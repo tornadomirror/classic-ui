@@ -10,9 +10,18 @@ import networkConfig from '@/networkConfig'
 import GovernanceABI from '@/abis/Governance.abi.json'
 import AggregatorABI from '@/abis/Aggregator.abi.json'
 
+import { graph } from '@/services'
 import { httpConfig } from '@/constants'
 
-const { numberToHex, toWei, fromWei, toBN, hexToNumber, hexToNumberString } = require('web3-utils')
+const {
+  numberToHex,
+  toWei,
+  fromWei,
+  toBN,
+  hexToNumber,
+  hexToNumberString,
+  toChecksumAddress
+} = require('web3-utils')
 
 const state = () => {
   return {
@@ -675,19 +684,32 @@ const actions = {
       const netId = rootGetters['metamask/netId']
       const aggregatorContract = getters.aggregatorContract
       const govInstance = getters.govContract({ netId })
-      const config = getters.getConfig({ netId })
 
       if (!govInstance) {
         return
       }
 
-      const [events, statuses] = await Promise.all([
-        govInstance.getPastEvents('ProposalCreated', {
-          fromBlock: config.constants.GOVERNANCE_BLOCK,
-          toBlock: 'latest'
-        }),
-        aggregatorContract.methods.getAllProposals(govInstance._address).call()
-      ])
+      const statusesPromise = aggregatorContract.methods.getAllProposals(govInstance._address).call()
+
+      let events = []
+
+      if (netId === 1) {
+        const graphProposals = await graph.getProposalCreateds()
+
+        if (graphProposals.length) {
+          events = graphProposals.map((p) => ({
+            returnValues: {
+              id: Number(p.proposalId),
+              proposer: p.proposer,
+              target: p.target,
+              description: p.description
+            },
+            blockNumber: p.blockNumber
+          }))
+        }
+      }
+
+      const statuses = await statusesPromise
 
       const parseDescription = ({ id, text }) => {
         if (netId === 1) {
@@ -840,34 +862,19 @@ const actions = {
       }
 
       const netId = rootGetters['metamask/netId']
-      const config = getters.getConfig({ netId })
 
       const aggregatorContract = getters.aggregatorContract
       const govInstance = getters.govContract({ netId })
-      let delegatedAccs = await govInstance.getPastEvents('Delegated', {
-        filter: {
-          to: ethAccount
-        },
-        fromBlock: config.constants.GOVERNANCE_BLOCK,
-        toBlock: 'latest'
-      })
-      let undelegatedAccs = await govInstance.getPastEvents('Undelegated', {
-        filter: {
-          from: ethAccount
-        },
-        fromBlock: config.constants.GOVERNANCE_BLOCK,
-        toBlock: 'latest'
-      })
-      delegatedAccs = delegatedAccs.map((acc) => acc.returnValues.account)
-      undelegatedAccs = undelegatedAccs.map((acc) => acc.returnValues.account)
-      const uniq = delegatedAccs.filter((obj, index, self) => {
-        const indexUndelegated = undelegatedAccs.indexOf(obj)
-        if (indexUndelegated !== -1) {
-          undelegatedAccs.splice(indexUndelegated, 1)
-          return false
+      let uniq = []
+
+      if (netId === 1) {
+        const delegators = await graph.getDelegators({ delegatee: ethAccount.toLowerCase() })
+
+        if (delegators.length) {
+          uniq = delegators.map((address) => toChecksumAddress(address))
         }
-        return true
-      })
+      }
+
       let balances = await aggregatorContract.methods.getGovernanceBalances(govInstance._address, uniq).call()
       balances = balances.reduce((acc, balance, i) => {
         acc = acc.add(toBN(balance))

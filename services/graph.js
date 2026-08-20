@@ -7,7 +7,11 @@ import {
   GET_REGISTERED,
   GET_WITHDRAWALS,
   GET_NOTE_ACCOUNTS,
-  GET_ENCRYPTED_NOTES
+  GET_ENCRYPTED_NOTES,
+  GET_PROPOSALS,
+  GET_DELEGATES,
+  GET_UNDELEGATES,
+  GET_VOTED
 } from './queries'
 
 const isEmptyArray = (arr) => !Array.isArray(arr) || !arr.length
@@ -43,6 +47,12 @@ const registryLink = () => {
   return CHAIN_GRAPH_URLS[88888888].replace('{apiKey}', getApiKey(88888888))
 }
 
+const governanceLink = () => {
+  const GOV_GRAPH_URL =
+    'https://gateway.thegraph.com/api/{apiKey}/subgraphs/id/2Z6mFMqDdwHSvbMLS3Zy3egmrEwHXLxHaDgeAHt9NrnG'
+  return GOV_GRAPH_URL.replace('{apiKey}', getApiKey(10))
+}
+
 const CHAIN_GRAPH_URLS = {
   1: 'https://gateway.thegraph.com/api/{apiKey}/subgraphs/id/Ec6fVMDVqXTDQZ3c4jxcyV3zBXqkdgMWfhdtCgtqn7Sh',
   10: 'https://gateway.thegraph.com/api/{apiKey}/subgraphs/id/GvkbnEVhLD6KArXpEzLFtSKRmspBW29ApKFqR5FjuP2P',
@@ -72,6 +82,13 @@ const client = new ApolloClient({
 
 const registryClient = new ApolloClient({
   uri: registryLink,
+  cache: new InMemoryCache(),
+  credentials: 'omit',
+  defaultOptions
+})
+
+const governanceClient = new ApolloClient({
+  uri: governanceLink,
   cache: new InMemoryCache(),
   credentials: 'omit',
   defaultOptions
@@ -443,6 +460,152 @@ async function getEncryptedNotes({ fromBlock, netId }) {
   return data.encryptedNotes
 }
 
+async function getGovernanceMeta() {
+  try {
+    const { data } = await governanceClient.query({
+      query: gql(_META)
+    })
+
+    if (!data) {
+      return undefined
+    }
+
+    return data._meta.block.number
+  } catch {
+    return undefined
+  }
+}
+
+async function queryProposals({ first, skip }) {
+  const { data } = await governanceClient.query({
+    query: gql(GET_PROPOSALS),
+    variables: { first, skip }
+  })
+
+  if (!data) {
+    return []
+  }
+
+  return data.proposals
+}
+
+async function getProposalCreateds() {
+  try {
+    let proposals = []
+
+    while (true) {
+      const result = await queryProposals({ first, skip: proposals.length })
+
+      if (isEmptyArray(result)) {
+        break
+      }
+
+      if (result.length < 900) {
+        proposals = proposals.concat(result)
+        break
+      }
+
+      proposals = proposals.concat(result)
+    }
+
+    if (!proposals) {
+      return []
+    }
+
+    return proposals.map((p) => ({
+      proposalId: p.proposalId,
+      proposer: p.proposer,
+      target: p.target,
+      startTime: p.startTime,
+      endTime: p.endTime,
+      description: p.description,
+      blockNumber: Number(p.blockNumber),
+      transactionHash: p.transactionHash,
+      executed: p.executed
+    }))
+  } catch {
+    return []
+  }
+}
+
+async function getProposalVotes({ proposalId, fromBlock }) {
+  try {
+    let votes = []
+
+    while (true) {
+      const result = await queryProposalVotes({ proposalId, fromBlock, skip: votes.length })
+
+      if (isEmptyArray(result)) {
+        break
+      }
+
+      if (result.length < 900) {
+        votes = votes.concat(result)
+        break
+      }
+
+      votes = votes.concat(result)
+    }
+
+    return votes
+  } catch {
+    return []
+  }
+}
+
+async function queryProposalVotes({ proposalId, fromBlock, skip }) {
+  const { data } = await governanceClient.query({
+    query: gql(GET_VOTED),
+    variables: { proposalId, first, skip, fromBlock }
+  })
+
+  if (!data) {
+    return []
+  }
+
+  return data.votes
+}
+
+async function getDelegators({ delegatee }) {
+  try {
+    const [{ data: delegated }, { data: undelegated }] = await Promise.all([
+      governanceClient.query({
+        query: gql(GET_DELEGATES),
+        variables: { delegatee }
+      }),
+      governanceClient.query({
+        query: gql(GET_UNDELEGATES),
+        variables: { delegatee }
+      })
+    ])
+
+    const allEvents = [
+      ...(delegated?.delegates || []).map(({ account, blockNumber }) => ({
+        account,
+        blockNumber: Number(blockNumber),
+        type: 'delegate'
+      })),
+      ...(undelegated?.undelegates || []).map(({ account, blockNumber }) => ({
+        account,
+        blockNumber: Number(blockNumber),
+        type: 'undelegate'
+      }))
+    ].sort((a, b) => b.blockNumber - a.blockNumber)
+
+    const latestEvents = new Map()
+
+    for (const { account, type } of allEvents) {
+      if (!latestEvents.has(account)) {
+        latestEvents.set(account, type)
+      }
+    }
+
+    return [...latestEvents.entries()].filter(([, type]) => type === 'delegate').map(([account]) => account)
+  } catch {
+    return []
+  }
+}
+
 export default {
   getDeposits,
   getStatistic,
@@ -451,5 +614,9 @@ export default {
   getNoteAccounts,
   getAllRegisters,
   getAllWithdrawals,
-  getAllEncryptedNotes
+  getAllEncryptedNotes,
+  getGovernanceMeta,
+  getProposalCreateds,
+  getProposalVotes,
+  getDelegators
 }
