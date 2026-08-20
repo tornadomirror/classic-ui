@@ -14,6 +14,28 @@
     </b-notification>
 
     <b-notification
+      :active="isActiveNotification.first"
+      class="main-notification"
+      type="is-info"
+      icon-pack="icon"
+      has-icon
+      :aria-close-label="$t('closeNotification')"
+      @close="disableNotification({ key: 'first' })"
+    >
+      <i18n path="phishingNotification">
+        <template v-slot:link>
+          <a
+            href="https://github.com/MetaMask/eth-phishing-detect/pull/174144"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {{ $t('details') }}
+          </a>
+        </template>
+      </i18n>
+    </b-notification>
+
+    <b-notification
       :active="isActiveNotification.third"
       class="main-notification"
       type="is-warning"

@@ -1,4 +1,6 @@
 {
+  "phishingNotification": "Домен tornado.cash належить шахраям. Вже кілька користувачів втратили величезні суми грошей на цьому сайті! {link}",
+  "details": "Подробиці",
   "closeNotification": "Закрити повідомлення",
   "indexNotification": "Tornado Cash зараз обслуговується спільнотою, щоб дізнатися більше, відвідайте {link}",
   "indexNotificationLinkText": "https://t.me/TornadoCashOfficialDAO",

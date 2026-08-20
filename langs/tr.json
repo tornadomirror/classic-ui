@@ -1,4 +1,6 @@
 {
+  "phishingNotification": "tornado.cash alanı dolandırıcılar tarafından tutulmaktadır. Birden fazla kullanıcı bu sitede zaten büyük miktarda para kaybetmiştir! {link}",
+  "details": "Detaylar",
   "closeNotification": "Bildirimi Kapat",
   "indexNotification": "Tornado Cash artık topluluk tarafından yönetiliyor, daha fazla bilgi için {link} adresini ziyaret edin.",
   "indexNotificationLinkText": "https://t.me/TornadoCashOfficialDAO",

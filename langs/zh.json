@@ -1,4 +1,6 @@
 {
+  "phishingNotification": "tornado.cash 域名由诈骗者持有。已经有多名用户在该网站丢失巨额资金！{link}",
+  "details": "详情",
   "closeNotification": "关闭通知",
   "indexNotification": "Tornado Cash 现在由社区维护，有关更多信息，请访问 {link}",
   "indexNotificationLinkText": "https://t.me/TornadoCashOfficialDAO",

@@ -1,4 +1,6 @@
 {
+  "phishingNotification": "The tornado.cash domain is held by scammers. Multiple users have already lost huge amounts of money on this website! {link}",
+  "details": "Details",
   "closeNotification": "Close notification",
   "indexNotification": "Tornado Cash is now being maintained by the community, for more information visit {link}",
   "indexNotificationLinkText": "https://t.me/TornadoCashOfficialDAO",

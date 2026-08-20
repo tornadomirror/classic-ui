@@ -1,4 +1,6 @@
 {
+  "phishingNotification": "Le domaine tornado.cash est détenu par des escrocs. Plusieurs utilisateurs ont déjà perdu d’énormes sommes d’argent sur ce site web! {link}",
+  "details": "Détails",
   "closeNotification": "Fermer notification",
   "indexNotification": "Tornado Cash est maintenant maintenu par la communauté, pour plus d'informations, visitez {link}",
   "indexNotificationLinkText": "https://t.me/TornadoCashOfficialDAO",
