@@ -169,7 +169,7 @@ async function getAllDeposits({ currency, amount, fromBlock, netId }) {
         break
       }
 
-      if (result.length < 900) {
+      if (result.length < first) {
         deposits = deposits.concat(result)
         break
       }
@@ -294,7 +294,7 @@ async function getAllWithdrawals({ currency, amount, fromBlock, netId }) {
         break
       }
 
-      if (result.length < 900) {
+      if (result.length < first) {
         withdrawals = withdrawals.concat(result)
         break
       }
@@ -397,7 +397,7 @@ async function getAllEncryptedNotes({ fromBlock, netId }) {
         break
       }
 
-      if (result.length < 900) {
+      if (result.length < first) {
         encryptedNotes = encryptedNotes.concat(result)
         break
       }
@@ -500,7 +500,7 @@ async function getProposalCreateds() {
         break
       }
 
-      if (result.length < 900) {
+      if (result.length < first) {
         proposals = proposals.concat(result)
         break
       }
@@ -539,7 +539,7 @@ async function getProposalVotes({ proposalId, fromBlock }) {
         break
       }
 
-      if (result.length < 900) {
+      if (result.length < first) {
         votes = votes.concat(result)
         break
       }
