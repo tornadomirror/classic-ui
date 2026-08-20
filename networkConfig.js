@@ -22,7 +22,7 @@ export default {
     deployedBlock: 9116966,
     rpcUrls: {
       pocket: {
-        name: 'pocket',
+        name: 'Pocket',
         url: 'https://eth.api.pocket.network'
       },
       mevblocker: {
@@ -30,7 +30,7 @@ export default {
         url: 'https://rpc.mevblocker.io'
       },
       mevblockerFullprivacy: {
-        name: 'Mevblocker',
+        name: 'Mevblocker FullPrivacy',
         url: 'https://rpc.mevblocker.io/fullprivacy'
       },
       torndaoRPC: {
@@ -52,10 +52,6 @@ export default {
       xrpc: {
         name: 'Xrpc',
         url: 'https://0xrpc.io/eth'
-      },
-      lavaRPC: {
-        name: 'LavaRPC',
-        url: 'https://eth1.lava.build'
       }
     },
     multicall: '0xeefba1e63905ef1d7acba5a8513c70307c1ce441',
