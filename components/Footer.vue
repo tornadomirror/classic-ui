@@ -61,7 +61,7 @@
                 <b-button
                   tag="a"
                   type="is-icon"
-                  href="https://codeberg.org/torndao/classic-ui"
+                  href="https://github.com/tornado-dao/classic-ui"
                   target="_blank"
                   rel="noopener noreferrer"
                   icon-right="git"
