@@ -20,6 +20,14 @@
         {{ $t('compliance') }}
       </b-navbar-item>
       <b-navbar-item
+        href="https://nova.tornadocash-crypto.cash"
+        target="_blank"
+        data-test="nova_link"
+        rel="noopener noreferrer"
+      >
+        Nova
+      </b-navbar-item>
+      <b-navbar-item
         href="https://docs.tornadocash.eth.limo"
         target="_blank"
         data-test="docs_link"
