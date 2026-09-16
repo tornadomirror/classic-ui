@@ -61,7 +61,7 @@
                 <b-button
                   tag="a"
                   type="is-icon"
-                  href="https://github.com/tornado-dao/classic-ui"
+                  href="https://github.com/Tornadomirror/classic-ui"
                   target="_blank"
                   rel="noopener noreferrer"
                   icon-right="git"
