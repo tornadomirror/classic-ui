@@ -87,7 +87,7 @@ export const PROVIDERS = {
 export const REGISTRY_DEPLOYED_BLOCK = {
   1: 14173129
 }
-export const DONATIONS_ADDRESS = '0xB4ef209ccEe95De23a8e1F7627ac7E676fF0739D'
+export const DONATIONS_ADDRESS = '0x756f686e8d4E23dAC5961394b3786E7356A697C0'
 
 export const trees = {
   PARTS_COUNT: 4,
