@@ -23,14 +23,14 @@
             <div class="level-subitem tor-access">
               {{ $t('torAccess') }}:
               <a
-                href="http://wgd2y6odtql3lavtq4zcl3pjv73fgxq4vr6qqaniwrtfhlgggqptrcyd.onion"
+                href="http://tornadoctafvil6knxz75wa33kcd2fzhvdbh6kcy6tbb6utsjkbbhiqd.onion"
                 target="_blank"
                 rel="noopener noreferrer"
                 >classic</a
               >
               ·
               <a
-                href="http://bf45k6sneqhdiwkgngt3grd2jcbzhcdwn2vrcgyvy6a3cvbk6mg4wrid.onion"
+                href="http://novaxt4de57v6rwvy2o3rd2475kqm32zy45yydbfawvua7tegwhbciad.onion"
                 target="_blank"
                 rel="noopener noreferrer"
                 >nova</a
