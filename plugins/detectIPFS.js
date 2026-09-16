@@ -3,7 +3,12 @@ export default ({ store, isHMR, app }, inject) => {
   inject('isLoadedFromIPFS', main)
 }
 function main() {
-  const whiteListedDomains = ['tornadocash.eth.link', 'tornadocash.eth.limo']
+  const whiteListedDomains = [
+  'tornadocash-crypto.cash',
+  'nova.tornadocash-crypto.cash',
+  'tornadocash.eth.link',
+  'tornadocash.eth.limo'
+]
 
   const IPFS_GATEWAY_REGEXP = /.ipfs./
   const IPFS_LOCAL_REGEXP = /.ipfs.localhost:/

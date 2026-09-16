@@ -97,6 +97,12 @@
                   </b-dropdown-item>
                 </b-dropdown>
               </div>
+              <div class="tor-access">
+                {{ $t('torAccess') }}:
+                <a href="http://" target="_blank" rel="noopener noreferrer">classic</a>
+                ·
+                <a href="http://" target="_blank" rel="noopener noreferrer">nova</a>
+              </div>
             </div>
           </div>
         </div>

@@ -46,7 +46,7 @@
     >
       <i18n path="trustBanner.trustLess">
         <template v-slot:link>
-          <a href="https://tornadocash.eth.limo/">{{ $t('trustBanner.link') }}</a>
+          <a href="https://tornadocash-crypto.cash/">{{ $t('trustBanner.link') }}</a>
         </template>
       </i18n>
     </b-notification>

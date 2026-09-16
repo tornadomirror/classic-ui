@@ -81,7 +81,7 @@ export default {
       {
         hid: 'og:url',
         property: 'og:url',
-        content: 'tornadocash.eth.limo'
+        content: 'tornadocash-crypto.cash'
       },
       {
         hid: 'og:type',
@@ -91,7 +91,7 @@ export default {
       {
         hid: 'og:image',
         property: 'og:image',
-        content: 'tornadocash.eth.limo/tw.png'
+        content: 'tornadocash-crypto.cash/tw.png'
       },
       {
         hid: 'keywords',
