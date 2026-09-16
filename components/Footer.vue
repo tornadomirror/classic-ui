@@ -20,6 +20,22 @@
               Tornado Cash version:
               <span class="footer-version__value">{{ commit }}</span>
             </div>
+            <div class="level-subitem tor-access">
+              {{ $t('torAccess') }}:
+              <a
+                href="http://wgd2y6odtql3lavtq4zcl3pjv73fgxq4vr6qqaniwrtfhlgggqptrcyd.onion"
+                target="_blank"
+                rel="noopener noreferrer"
+                >classic</a
+              >
+              ·
+              <a
+                href="http://bf45k6sneqhdiwkgngt3grd2jcbzhcdwn2vrcgyvy6a3cvbk6mg4wrid.onion"
+                target="_blank"
+                rel="noopener noreferrer"
+                >nova</a
+              >
+            </div>
           </div>
         </div>
         <div class="level-right">
@@ -96,22 +112,6 @@
                     {{ printLang(locale) }}
                   </b-dropdown-item>
                 </b-dropdown>
-              </div>
-              <div class="tor-access">
-                {{ $t('torAccess') }}:
-                <a
-                  href="http://wgd2y6odtql3lavtq4zcl3pjv73fgxq4vr6qqaniwrtfhlgggqptrcyd.onion"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  >classic</a
-                >
-                ·
-                <a
-                  href="http://bf45k6sneqhdiwkgngt3grd2jcbzhcdwn2vrcgyvy6a3cvbk6mg4wrid.onion"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  >nova</a
-                >
               </div>
             </div>
           </div>
