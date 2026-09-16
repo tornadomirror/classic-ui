@@ -41,10 +41,6 @@ export default {
         name: 'SentioRPC',
         url: 'https://rpc.sentio.xyz/mainnet'
       },
-      lavaRPC: {
-        name: 'LavaRPC',
-        url: 'https://eth1.lava.build'
-      },
       blastRPC: {
         name: 'BlastRPC',
         url: 'https://eth-mainnet.public.blastapi.io'
@@ -52,6 +48,10 @@ export default {
       xrpc: {
         name: 'Xrpc',
         url: 'https://0xrpc.io/eth'
+      },
+      drpcRPC: {
+        name: 'drpcRPC',
+        url: 'https://eth.drpc.org'
       }
     },
     multicall: '0xeefba1e63905ef1d7acba5a8513c70307c1ce441',
@@ -167,10 +167,6 @@ export default {
         name: 'bnbRPC',
         url: 'https://bsc-dataseed.bnbchain.org'
       },
-      tornadoRPC: {
-        name: 'Tornado RPC',
-        url: 'https://tornadocash-rpc.com/bsc'
-      },
       defibitRPC: {
         name: 'defibitRPC',
         url: 'https://bsc-dataseed1.defibit.io'
@@ -183,9 +179,9 @@ export default {
         name: 'publicRPC',
         url: 'https://bsc-rpc.publicnode.com'
       },
-      poktRPC: {
-        name: 'poktRPC',
-        url: 'https://bsc-pokt.nodies.app'
+      drpcRPC: {
+        name: 'drpcRPC',
+        url: 'https://bsc.drpc.org'
       }
     },
     tokens: {
@@ -230,17 +226,9 @@ export default {
     multicall: '0xA52EE88C0F24EF8b96C3989cAb42cfC6008041A8',
     echoContractAccount: '0x6e824e64C2B30Eb542b9917AA2FbEA593daEA5D6',
     rpcUrls: {
-      rivet: {
-        name: 'rivet',
-        url: 'https://etc.rivet.link'
-      },
       etcdesktop: {
         name: 'etcdesktop',
         url: 'https://etc.etcdesktop.com'
-      },
-      mytokenpocket: {
-        name: 'mytokenpocket',
-        url: 'https://etc.mytokenpocket.vip'
       },
       xrpc: {
         name: '0xrpc',
@@ -249,10 +237,6 @@ export default {
       geth: {
         name: 'geth',
         url: 'https://geth-at.etc-network.info'
-      },
-      besu: {
-        name: 'besu',
-        url: 'https://besu-at.etc-network.info'
       }
     },
     tokens: {
@@ -304,17 +288,9 @@ export default {
         name: 'publicRPC',
         url: 'https://polygon-bor-rpc.publicnode.com'
       },
-      blastapiRPC: {
-        name: 'blastapiRPC',
-        url: 'https://polygon-mainnet.public.blastapi.io'
-      },
       drpcRPC: {
         name: 'drpcRPC',
         url: 'https://polygon.drpc.org'
-      },
-      meowRPC: {
-        name: 'meowRPC',
-        url: 'https://polygon.meowrpc.com'
       }
     },
     tokens: {
@@ -360,10 +336,6 @@ export default {
     echoContractAccount: '0xa75BF2815618872f155b7C4B0C81bF990f5245E4',
     ovmGasPriceOracleContract: '0x420000000000000000000000000000000000000F',
     rpcUrls: {
-      blockpiRPC: {
-        name: 'blockpiRPC',
-        url: 'https://optimism.blockpi.network/v1/rpc/public'
-      },
       publicRpc: {
         name: 'publicRPC',
         url: 'https://optimism-rpc.publicnode.com'
@@ -371,6 +343,10 @@ export default {
       poktRpc: {
         name: 'Pokt RPC',
         url: 'https://op-pokt.nodies.app'
+      },
+      drpcRpc: {
+        name: 'drpcRpc',
+        url: 'https://optimism.drpc.org'
       }
     },
     tokens: {
@@ -431,9 +407,9 @@ export default {
         name: 'publicRpc',
         url: 'https://arbitrum-one-rpc.publicnode.com'
       },
-      blockpiRpc: {
-        name: 'blockpiRpc',
-        url: 'https://arbitrum.blockpi.network/v1/rpc/public'
+      drpcRpc: {
+        name: 'drpcRpc',
+        url: 'https://arbitrum.drpc.org'
       }
     },
     tokens: {
@@ -478,6 +454,14 @@ export default {
     multicall: '0xb5b692a88bdfc81ca69dcb1d924f59f0413a602a',
     echoContractAccount: '0xa75BF2815618872f155b7C4B0C81bF990f5245E4',
     rpcUrls: {
+      publicRPC: {
+        name: 'publicRPC',
+        url: 'https://gnosis-rpc.publicnode.com'
+      },
+      drpcRPC: {
+        name: 'drpcRPC',
+        url: 'https://gnosis.drpc.org'
+      },
       gnosisRPC: {
         name: 'Gnosis RPC',
         url: 'https://rpc.gnosischain.com'
@@ -485,14 +469,6 @@ export default {
       fmRPC: {
         name: 'fmRPC',
         url: 'https://rpc.gnosis.gateway.fm'
-      },
-      poktRPC: {
-        name: 'poktRPC',
-        url: 'https://gnosis-pokt.nodies.app'
-      },
-      publicRPC: {
-        name: 'publicRPC',
-        url: 'https://gnosis-rpc.publicnode.com'
       }
     },
     tokens: {
@@ -545,10 +521,6 @@ export default {
         name: 'Publicnode RPC',
         url: 'https://avalanche-c-chain-rpc.publicnode.com'
       },
-      meowRPC: {
-        name: 'Meow RPC',
-        url: 'https://avax.meowrpc.com'
-      },
       drpcRPC: {
         name: 'drpcRPC',
         url: 'https://avalanche.drpc.org'
@@ -596,14 +568,6 @@ export default {
     echoContractAccount: '0xcDD1fc3F5ac2782D83449d3AbE80D6b7B273B0e5',
     aggregatorContract: '0x4088712AC9fad39ea133cdb9130E465d235e9642',
     rpcUrls: {
-      blastapiRPC: {
-        name: 'blastapiRPC',
-        url: 'https://eth-sepolia.public.blastapi.io'
-      },
-      drpcRPC: {
-        name: 'drpcRPC',
-        url: 'https://sepolia.drpc.org'
-      },
       tenderlyRPC: {
         name: 'tenderlyRPC',
         url: 'https://sepolia.gateway.tenderly.co'
