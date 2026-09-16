@@ -44,7 +44,7 @@ export default {
     fallback: true
   },
   head: {
-    title: 'Tornado Cash Official - Secure, Decentralized, Private protocol',
+    title: 'Tornado Cash Crypto Community - Secure, Decentralized, Private protocol',
     meta: [
       { charset: 'utf-8' },
       {
@@ -70,7 +70,7 @@ export default {
       {
         hid: 'og:title',
         property: 'og:title',
-        content: 'Tornado Cash Official - Secure, Decentralized, Private protocol'
+        content: 'Tornado Cash Crypto Community - Secure, Decentralized, Private protocol'
       },
       {
         hid: 'og:description',
@@ -97,7 +97,7 @@ export default {
         hid: 'keywords',
         name: 'keywords',
         content:
-          'Tornado, TornadoCash, Tornado Cash Official, Ethereum, ERC20, dapp, smart contract, secure, anonymous, private, decentralized, metamask, zksnark, zero knowledge'
+          'Tornado, TornadoCash, Tornado Cash Crypto Community, Ethereum, ERC20, dapp, smart contract, secure, anonymous, private, decentralized, metamask, zksnark, zero knowledge'
       }
     ],
     link: [
